@@ -3,10 +3,23 @@ var Datastore = require('nedb')
 var _ = require('lodash')
 //Setup config
 var db = new Datastore({ filename: 'activity.json', autoload: true });
+//Run: sudo node node_modules/node-dash-button/bin/findbutton
+//in order to find devices
 var dude_button = {
   mac: "44:65:0d:ed:e9:2f"
 }
-var mac_list = {[dude_button.mac]: "Dude Button"}
+var on_button_1 = {
+  mac: "74:75:48:cd:01:8f"
+}
+var on_button_2 = {
+  mac: "a0:02:dc:36:3b:92"
+}
+
+var mac_list = {
+  [dude_button.mac]: "Dude Button",
+  [on_button_1.mac]: "On Button 1",
+  [on_button_2.mac]: "On Button 2"
+}
 var dash_listener = dash_button(_.keys(mac_list)); //address from step above
 dash_listener.on("detected", function (dash_mac){
   console.log("Dash Button Pressed:", mac_list[dash_mac])
