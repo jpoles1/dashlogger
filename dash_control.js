@@ -2,7 +2,7 @@ var dash_button = require('node-dash-button');
 var Datastore = require('nedb')
 var _ = require('lodash')
 //Setup config
-var db = new Datastore({ filename: 'activity.json', autoload: true });
+var db = new Datastore({ filename: 'data/activity.json', autoload: true });
 //Run: sudo node node_modules/node-dash-button/bin/findbutton
 //in order to find devices
 var dude_button = {
@@ -14,11 +14,18 @@ var on_button_1 = {
 var on_button_2 = {
   mac: "a0:02:dc:36:3b:92"
 }
-
+var milk_button = {
+  mac: "44:65:0d:a8:8f:87"
+}
+var all_button = {
+  mac: "44:65:0d:21:42:1b"
+}
 var mac_list = {
   [dude_button.mac]: "Dude Button",
   [on_button_1.mac]: "On Button 1",
-  [on_button_2.mac]: "On Button 2"
+  [on_button_2.mac]: "On Button 2",
+  [milk_button.mac]: "Milk Button",
+  [all_button.mac]: "All Button"
 }
 var dash_listener = dash_button(_.keys(mac_list)); //address from step above
 dash_listener.on("detected", function (dash_mac){
@@ -35,3 +42,4 @@ dash_listener.on("detected", function (dash_mac){
     console.log("Added entry to DB:", db_entry)
   })
 });
+return db;
