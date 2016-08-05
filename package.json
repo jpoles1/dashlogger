@@ -10,6 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node dash_control.js",
+    "findbutton": "node node_modules/node-dash-button/bin/findbutton",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
