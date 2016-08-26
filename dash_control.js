@@ -40,7 +40,10 @@ var milk_button = {
 }
 var all_button = {
   name: "All Button",
-  mac: "44:65:0d:21:42:1b"
+  mac: "44:65:0d:21:42:1b",
+  cb: () => {
+    http_voice("all%20off")
+  }
 }
 //create map of mac address keys and button objects
 var mac_list = {
