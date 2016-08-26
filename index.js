@@ -1,4 +1,4 @@
-var db = require("./dash_control");
+global.db = require("./dash_control");
 var express = require("express");
 var app = express();
 //Allow for HTTP POST parsing

@@ -2,3 +2,86 @@
 layout: layouts/dash.dot
 title: Page title
 ---
+[[##section:
+<div class="col-md-6 col-md-offset-3 dashbox">
+  <center>
+    <h1>Dash Dashboard</h1>
+  </center>
+</div>
+<div class="col-md-6 col-md-offset-3 dashbox">
+  <center>
+    <h1>Button Counts</h1>
+    <svg id="count-plot" class="dashplot">
+
+    </svg>
+  </center>
+</div>
+<div class="col-md-6 col-md-offset-3 dashbox">
+  <center>
+    <h1>Hourly Events</h1>
+    <div id="event-plot" class="dashplot">
+      
+    </div>
+  </center>
+</div>
+<div class="col-md-6 col-md-offset-3 dashbox">
+  <center>
+    <h1>Button Events</h1>
+    <div id="event-plot" class="dashplot">
+
+    </div>
+  </center>
+</div>
+#]]
+[[##scripts:
+<script>
+  $.get("/dashdata", (data) => {
+    console.log(data.button_events)
+    nv.addGraph(function() {
+      var chart = nv.models.discreteBarChart()
+        .x(function(d) { return d.label })    //Specify the data accessors.
+        .y(function(d) { return d.value })
+      d3.select("#count-plot")
+        .datum(data.button_counts)
+        .call(chart);
+      nv.utils.windowResize(chart.update);
+      return chart;
+    });
+    //Setup hourly events
+    nv.addGraph(function() {
+      var chart = nv.models.multiBarChart()
+        .showControls(true)
+        .x(function(d) { return d.label })    //Specify the data accessors.
+        .y(function(d) { return d.value })
+      d3.select("#hourly-plot")
+        .datum(data.button_counts)
+        .call(chart);
+      nv.utils.windowResize(chart.update);
+      return chart;
+    });
+    //Setup events plot
+    /*var event_colors = d3.scale.category20();
+    var endTime = Date.now();
+    var day = 24 * 60 * 60 * 1000;
+    var startTime = endTime - 1 * day;
+    var eventDropsChart = d3.chart.eventDrops()
+      .eventLineColor(function (datum, index) {
+          return event_colors(index);
+      })
+      .start(new Date(startTime))
+      .end(new Date(endTime));
+    var chart = d3.select("#event-plot")
+      .datum(data.button_events)
+      .call(eventDropsChart)
+    var eventResize = () => {
+      chart.call(
+        eventDropsChart.width($("#event-plot").width())
+      )
+      chart.select("svg")
+      .attr("width", $("#event-plot").width())
+    }
+    eventResize()
+    $(window).resize(eventResize)*/
+  })
+</script>
+#]]

@@ -9,7 +9,8 @@
     "express-dot-engine": "^1.0.7",
     "lodash": "^4.13.1",
     "nedb": "^1.8.0",
-    "node-dash-button": "^0.5.5"
+    "node-dash-button": "^0.5.5",
+    "request": "^2.74.0"
   },
   "devDependencies": {
     "nodemon": "^1.10.0"
