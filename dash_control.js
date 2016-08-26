@@ -5,9 +5,12 @@ var _ = require('lodash')
 //Setup config
 var db = new Datastore({ filename: 'data/activity.json', autoload: true });
 var http_voice = (command) => {
-  request('192.168.1.100:3030/voice?cmd='+command, function (error, response, body) {
+  request("http://192.168.1.100:3030/voice?cmd="+command, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log(body) // Show the HTML for the Google homepage.
+    }
+    else{
+      console.log(error)
     }
   })
 }
